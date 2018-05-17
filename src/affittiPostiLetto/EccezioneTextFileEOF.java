@@ -1,6 +1,6 @@
 package affittiPostiLetto;
 
-public class EccezioneTextFileEOF 
+public class EccezioneTextFileEOF extends Exception
 {
 
 }
