@@ -7,6 +7,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class PostiLetto implements Serializable
 {
@@ -62,18 +63,20 @@ public class PostiLetto implements Serializable
 	
 	public void registraAffittoInTesta(Affitto affitto) throws IOException, FileException
 	{
-		Nodo p=creaNodo(affitto, head); // il nodo p punta a head
-		head=p; //head andrà a puntare a p
+		Nodo p=creaNodo(affitto, head); 
+		head = p;
 		elementi++;
 	}
 	
 	public void registraAffittoInCoda(Affitto affitto) throws IOException, FileException, AffittoException
 	{
-		if(elementi==0)
+		if(elementi == 0)
 		{
 			registraAffittoInTesta(affitto);
+			
 			return;
 		}
+		
 		Nodo pn= creaNodo(affitto, null);
 		Nodo p=getLinkPosizione(elementi);
 		p.setLink(pn);
@@ -198,30 +201,76 @@ public class PostiLetto implements Serializable
 		if(posizione<0 || posizione>elementi)
 			throw new AffittoException("Posizione non valida");
 		
-		Nodo p=getLinkPosizione(posizione);
+		Nodo p = getLinkPosizione(posizione);
 		return p.getInfo();
 	}
 	
-	public void salvaAffitti(String nomeFile) throws IOException
+	public void salvaPostiLetto(String nomeFile) throws IOException
 	{
 		FileOutputStream file=new FileOutputStream(nomeFile);
 		ObjectOutputStream writer= new ObjectOutputStream(file);
-		writer.writeObject(this); //salva questo oggetto
+		writer.writeObject(this); 
 		writer.flush();
 		writer.close();
 	}
 	
-	public Affitto caricaAffitti(String nomeFile) throws IOException, ClassNotFoundException
+	public PostiLetto caricaPostiLetto(String nomeFile) throws IOException, ClassNotFoundException
 	{
 		FileInputStream file= new FileInputStream(nomeFile);
 		ObjectInputStream reader=new ObjectInputStream(file);
 		
-		Affitto affitto;
-		affitto=(Affitto)reader.readObject();
+		PostiLetto postiLetto;
+		postiLetto =(PostiLetto)reader.readObject();
 		file.close();
-		return affitto;
+		return postiLetto;
 	}
-
 	
+	public String checkoutAffitto(int id) throws AffittoException
+	{
+		String risultato = "";
+		LocalDateTime dataOdierna = LocalDateTime.now();
+		
+		if(elementi == 0)
+			throw new AffittoException("Lista vuota");
 
+		for (int i = 1; i <= elementi; i++) 
+		{
+			if(getAffitto(i).getCodiceIdentificativo() == id)
+			{
+				getAffitto(i).faiCheckout(dataOdierna);
+				System.out.println("Svolto checkout nell'affitto di Codice Identificativo: " + id);
+				
+			}
+		}
+		
+		if(risultato == "")
+			System.out.println("Nessuna affitto presente con Codice Identificativo: " + id);
+		
+		return risultato;
+	}
+	
+	public Affitto[] convertiListaArray() throws AffittoException
+	{
+		Affitto[] copia = new Affitto[elementi];
+		
+		for (int i = 0; i < copia.length; i++)
+		{
+			copia[i]=getAffitto(i+1);	
+		}
+		
+		return copia;
+	}
+	
+	public String visualizzaAffittiCognome() throws ClassNotFoundException, AffittoException, IOException, FileException
+	{
+		String risultato = "";
+		if(elementi == 0)
+			throw new AffittoException("Lista vuota");
+		
+		risultato = risultato + Ordinatore.OrdininaPerCognome(this).toString();
+		
+		return risultato;
+	}
+	
+	
 }

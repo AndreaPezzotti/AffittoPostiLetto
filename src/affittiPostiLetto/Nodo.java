@@ -2,30 +2,65 @@ package affittiPostiLetto;
 
 import java.io.Serializable;
 
+/**
+ * 
+ * @version 1.0
+ * @author user
+ */
 public class Nodo implements Serializable
 {
 	private Affitto info;
 	private Nodo link;
 	
+	/**
+	 * Costruttore. Quando viene istanziato un nuovo 
+	 * nodo la componente link viene settata a null.
+	 * @param processo oggetto di tipo Manutenzione
+	 * che va a costituire la parte informativa del nodo
+	 *  
+	 */
 	public Nodo (Affitto affitto)
 	{
 		setInfo(affitto);
 		setLink(null);	
 	}
-	
-	public Nodo getLink() {
+	/**
+	 *  Metodo getter che restituisce la componente
+	 *  link del nodo
+	 * @return link reference del prossimo oggetto nodo
+	 * 
+	 */
+	public Nodo getLink() 
+	{
 		return link;
 	}
-	
-	public void setLink(Nodo link) {
+	/**
+	 * Metodo setter che consente di settare la
+	 * componente link del nodo 
+	 * @param link reference del prossimo oggetto nodo
+	 * 
+	 */
+	public void setLink(Nodo link) 
+	{
 		this.link = link;
 	}
-	
-	public Affitto getInfo() {
+	/**
+	 * Metodo getter che restituisce la 
+	 *  componente informativa del nodo.
+	 *  @param info oggetto di tipo Manutenzio
+	 * 
+	 */
+	public Affitto getInfo() 
+	{
 		return info;
 	}
-	
-	public void setInfo(Affitto info) {
+	/**
+	 * Metodo setter che consente di settare la
+	 *  componente informativa del nodo
+	 * @param  info oggetto di tipo Manutenzione
+	 */
+	public void setInfo(Affitto info) 
+	{
 		this.info = info;
 	}
 	
