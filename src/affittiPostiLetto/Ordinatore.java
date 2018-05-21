@@ -46,18 +46,18 @@ public class Ordinatore implements Serializable
 		}			
 	}
 	
-	private static PostiLetto copiaAutofficina (PostiLetto autofficina) throws IOException, ClassNotFoundException
+	private static PostiLetto copiaPostiLetto (PostiLetto postiLetto) throws IOException, ClassNotFoundException
 	{
-		PostiLetto autofficina2 = new PostiLetto();
-		autofficina.salvaPostiLetto("postiLettoCopia.bin");
-		autofficina2 = autofficina2.caricaPostiLetto("postiLettoCopia.bin");
+		PostiLetto autofficinaLetto2 = new PostiLetto();
+		postiLetto.salvaPostiLetto("postiLettoCopia.bin");
+		autofficinaLetto2 = autofficinaLetto2.caricaPostiLetto("postiLettoCopia.bin");
 		
-		return autofficina2;
+		return autofficinaLetto2;
 	}
 	
 	public static PostiLetto OrdininaPerCognome(PostiLetto postiLetto) throws AffittoException, ClassNotFoundException, IOException, FileException
 	{
-		PostiLetto postiLetto2 = copiaAutofficina(postiLetto);
+		PostiLetto postiLetto2 = copiaPostiLetto(postiLetto);
 		boolean scambioAvvenuto;
 		
 		do
@@ -66,9 +66,9 @@ public class Ordinatore implements Serializable
 			
 			for (int i = 1; i < postiLetto2.getElementi(); i++) 
 			{
-				if(postiLetto2.getAffitto(i).getCognome().compareTo(postiLetto2.getAffitto(i+1).getCognome())>0)
+				if(postiLetto2.getAffitto(i).getCognome().compareTo(postiLetto2.getAffitto(i+1).getCognome()) > 0)
 				{
-					scambia(postiLetto2,i,i+1);
+					scambia(postiLetto2, i, i+1);
 					scambioAvvenuto = true;
 				}
 			}
@@ -76,6 +76,30 @@ public class Ordinatore implements Serializable
 		while(scambioAvvenuto == true);
 		
 		return postiLetto2;
+	}
+	
+	public static PostiLetto ordinaPerData(PostiLetto postiLetto) throws AffittoException, ClassNotFoundException, IOException, FileException
+	{
+		PostiLetto postiLetto2 = copiaPostiLetto(postiLetto);
+		boolean scambioAvvenuto;
+		
+		do
+		{
+			scambioAvvenuto = false;
+			
+			for (int i = 1; i < postiLetto2.getElementi(); i++) 
+			{
+				if(postiLetto2.getAffitto(i).getDataOraCheckin().isAfter(postiLetto2.getAffitto(i+1).getDataOraCheckin()))
+				{
+					scambia(postiLetto2, i, i+1);
+					scambioAvvenuto = true;
+				}
+			}
+		}
+		while(scambioAvvenuto == true);
+		
+		return postiLetto2;
+
 	}
 	
 

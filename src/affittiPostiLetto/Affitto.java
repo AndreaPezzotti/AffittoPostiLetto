@@ -1,9 +1,10 @@
 package affittiPostiLetto;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-public class Affitto 
+public class Affitto implements Serializable
 {
 	private int codiceIdentificativo;
 	private String cognome;
@@ -21,7 +22,7 @@ public class Affitto
 	 * @param dataOraCheckin ora che un cliente entra nella struttura
 	 * @param dataOraCheckou ora che un cliente esce dalla struttura
 	 */
-public Affitto(int codiceIdentificativo,String cognome,String nome,LocalDateTime dataOraCheckin,LocalDateTime dataOraCheckout)
+public Affitto(int codiceIdentificativo, String cognome, String nome, LocalDateTime dataOraCheckin, LocalDateTime dataOraCheckout)
 	{
 		setCodiceIdentificativo(codiceIdentificativo);
 		setCognome(cognome);
@@ -73,7 +74,7 @@ public int getCodiceIdentificativo()
 
 public void setCodiceIdentificativo(int codiceIdentificativo) 
 {
-	codiceIdentificativo = codiceIdentificativo;
+	this.codiceIdentificativo = codiceIdentificativo;
 }
 /** 
 * Metodo getter che restituisce il cognome del cliente che ha affittato un posto letto.
@@ -89,7 +90,7 @@ public String getCognome()
 */
 public void setCognome(String cognome) 
 {
-	cognome = cognome;
+	this.cognome = cognome;
 }
 /** 
 * Metodo getter che restituisce il nome del cliente che ha affittato un posto letto.
@@ -105,7 +106,7 @@ public String getNome()
 */
 public void setNome(String nome) 
 {
-	nome = nome;
+	this.nome = nome;
 }
 /** 
 * Metodo getter che restituisce la data e l'ora che un cliente entra nella struttura.
@@ -121,7 +122,7 @@ public LocalDateTime getDataOraCheckin()
 */
 public void setDataOraCheckin(LocalDateTime dataOraCheckin) 
 {
-	dataOraCheckin = dataOraCheckin;
+	this.dataOraCheckin = dataOraCheckin;
 }
 /** 
 * Metodo getter che restituisce la data e l'ora che un cliente esce nella struttura.
@@ -137,7 +138,7 @@ public LocalDateTime getDataOraCheckout()
 */
 public void setDataOraCheckout(LocalDateTime dataOraCheckout) 
 {
-	dataOraCheckout = dataOraCheckout;
+	this.dataOraCheckout = dataOraCheckout;
 }
 
 /**
@@ -162,9 +163,12 @@ public void setCheckout(boolean checkout)
  */
 public String toString()
 {
-	return (getCodiceIdentificativo()+" "+getCognome()+" "+getNome()+" "+getDataOraCheckin()+" "+getDataOraCheckout());
+	return ("ID: "+getCodiceIdentificativo()+"; Cognome: "+getCognome()+"; Nome: "+getNome()+"; Data Checkin: "+getDataOraCheckin()+"; Data Checkout: "+getDataOraCheckout());
 }
-
+/**
+ * Svolge il checkout aggiungendo data e ora di checkout all'oggetto
+ * @param data e ora del checkout
+ */
 public void faiCheckout (LocalDateTime dataOraCheckout)
 {
 	setDataOraCheckout(dataOraCheckout);
