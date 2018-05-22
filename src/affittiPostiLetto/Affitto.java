@@ -174,5 +174,16 @@ public void faiCheckout (LocalDateTime dataOraCheckout)
 	setDataOraCheckout(dataOraCheckout);
 	setCheckout(true);
 }
-	
+/**
+ * verifica se 2 affitti sono uguali
+ * @param a affitto da confrontare
+ * @return se sono uguali
+ */
+public boolean equals(Affitto a)
+{
+	if(getCodiceIdentificativo()==a.getCodiceIdentificativo())
+		return true;
+	else
+		return false;
+}
 }

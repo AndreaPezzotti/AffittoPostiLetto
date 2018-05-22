@@ -390,7 +390,7 @@ public class PostiLetto implements Serializable
 		return risultato;
 	}	
 	
-	/*public void esportaCSV (String nomeFile) throws IOException, AffittoException, FileException 
+	public void esportaCSV (String nomeFile) throws IOException, AffittoException, FileException 
 	{
 		TextFile file = new TextFile (nomeFile,'W');
 		String BackoupAffittiCSV;
@@ -404,5 +404,5 @@ public class PostiLetto implements Serializable
 		}
 		file.closeFile();
 		
-	}*/
+	}
 }

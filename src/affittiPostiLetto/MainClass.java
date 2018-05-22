@@ -2,6 +2,8 @@ package affittiPostiLetto;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InvalidClassException;
+import java.io.NotSerializableException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -39,6 +41,10 @@ public class MainClass
 			catch (FileNotFoundException e) 
 			{
 				System.out.println("file non presente");
+			}
+			catch(InvalidClassException e)
+			{
+				System.out.println("Nessun posto letto presente");
 			}
 
 			String nomeFile = "affitti.txt";
@@ -167,6 +173,12 @@ public class MainClass
 							System.out.println(e.toString());
 							break;
 						}
+						
+						catch (NullPointerException e) 
+						{
+							System.out.println("EHEHE..il programma non risponde ai comandi,esploderà tra 3,2,1.. !!!");
+						}
+						
 						break;
 						
 					}
@@ -201,7 +213,12 @@ public class MainClass
 							System.out.println(e.toString());
 							break;
 						}
+						catch (NullPointerException e) 
+						{
+							System.out.println("EHEHE..il programma non risponde ai comandi,abilitare modalità FAINA e scappare..esploderà tra 3,2,1.. !!!");
+						}
 						break;
+					
 						
 					}
 			
